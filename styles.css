@@ -124,7 +124,7 @@ body {
 
 .question-dropdown {
     flex: 1;
-    padding: 1rem 1.5rem;
+    padding: 1.5rem 2rem;
     border: 2px solid #e9ecef;
     border-radius: 25px;
     font-size: 1rem;
@@ -133,6 +133,13 @@ body {
     background: #f8f9fa;
     cursor: default;
     color: #333;
+    min-height: 80px;
+    max-height: 120px;
+    line-height: 1.4;
+    resize: none;
+    overflow-y: auto;
+    font-family: inherit;
+    word-wrap: break-word;
 }
 
 .question-dropdown:focus {
@@ -162,6 +169,18 @@ body {
 
 .send-button:active {
     transform: translateY(0);
+}
+
+.send-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.send-button:disabled:hover {
+    transform: none;
+    box-shadow: none;
 }
 
 @media (max-width: 768px) {

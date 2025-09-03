@@ -80,6 +80,11 @@ document.addEventListener('DOMContentLoaded', function () {
             // Show the question in chat
             setTimeout(() => {
                 addMessage(question.text, false);
+
+                // Enable continue button after question is asked
+                sendButton.disabled = false;
+                sendButton.style.opacity = '1';
+                sendButton.style.cursor = 'pointer';
             }, 500);
         } else {
             // Evaluation complete
@@ -110,6 +115,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const selectedQuestion = evaluationQuestions[currentQuestionIndex];
         const questionText = selectedQuestion.text;
 
+        // Disable continue button immediately after clicking
+        sendButton.disabled = true;
+        sendButton.style.opacity = '0.5';
+        sendButton.style.cursor = 'not-allowed';
+
         // Show user's answer
         addMessage(selectedQuestion.answer, true);
 
@@ -121,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (selectedQuestion.id === 'termination') {
                 setTimeout(() => {
                     showTerminationWarning();
-                }, 1000);
+                }, 4000);
                 return;
             }
 

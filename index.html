@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DystopianAI Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">Government Mandated Therapy AI</h1>
+            <p class="tagline">Your AI Companion</p>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <!-- Chat messages will appear here -->
+            </div>
+            <div class="chat-input-container">
+                <select id="questionDropdown" class="question-dropdown">
+                    <option value="">Select a question...</option>
+                    <option value="greeting">Hello, how are you?</option>
+                    <option value="purpose">What is your purpose?</option>
+                    <option value="therapy">How can you help me with therapy?</option>
+                    <option value="privacy">Is our conversation private?</option>
+                    <option value="ai">Are you really an AI?</option>
+                    <option value="mandated">Why is therapy mandated?</option>
+                    <option value="termination">Our government is evil!</option>
+                </select>
+                <button id="sendButton" class="send-button">Ask</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

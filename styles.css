@@ -1,0 +1,231 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.logo {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.tagline {
+    font-size: 1.1rem;
+    color: #666;
+    font-weight: 300;
+}
+
+.main-content {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.chat-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.chat-messages {
+    height: 400px;
+    padding: 1.5rem;
+    overflow-y: auto;
+    background: #f8f9fa;
+}
+
+.message {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 15px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    margin-left: auto;
+    text-align: right;
+}
+
+.bot-message {
+    background: white;
+    color: #333;
+    border: 1px solid #e9ecef;
+    margin-right: auto;
+}
+
+.chat-input-container {
+    display: flex;
+    padding: 1.5rem;
+    background: white;
+    border-top: 1px solid #e9ecef;
+    gap: 1rem;
+}
+
+.question-dropdown {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: 2px solid #e9ecef;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+    background: white;
+    cursor: pointer;
+}
+
+.question-dropdown:focus {
+    border-color: #667eea;
+}
+
+.question-dropdown option {
+    padding: 0.5rem;
+}
+
+.send-button {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.send-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.send-button:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        padding: 0 1rem;
+    }
+
+    .logo {
+        font-size: 2rem;
+    }
+
+    .main-content {
+        padding: 0 1rem;
+        margin: 1rem auto;
+    }
+
+    .chat-input-container {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .send-button {
+        width: 100%;
+    }
+}
+
+/* Termination warning overlay */
+.termination-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(220, 20, 60, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: terminationPulse 2s infinite;
+}
+
+.termination-warning {
+    background: rgba(0, 0, 0, 0.9);
+    color: #ff0000;
+    padding: 3rem;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 600px;
+    margin: 2rem;
+    border: 3px solid #ff0000;
+    box-shadow: 0 0 50px rgba(255, 0, 0, 0.8);
+}
+
+.termination-title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px #ff0000;
+}
+
+.termination-message {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: #ffffff;
+}
+
+@keyframes terminationPulse {
+
+    0%,
+    100% {
+        background: rgba(220, 20, 60, 0.95);
+    }
+
+    50% {
+        background: rgba(255, 0, 0, 0.95);
+    }
+}
+
+@media (max-width: 768px) {
+    .termination-title {
+        font-size: 2rem;
+    }
+
+    .termination-message {
+        font-size: 1.2rem;
+    }
+
+    .termination-warning {
+        padding: 2rem;
+        margin: 1rem;
+    }
+}

@@ -1,18 +1,97 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const startEvaluationButton = document.getElementById('startEvaluationButton');
+    const startEvaluationContainer = document.getElementById('startEvaluationContainer');
+    const chatContainer = document.getElementById('chatContainer');
     const questionDropdown = document.getElementById('questionDropdown');
     const sendButton = document.getElementById('sendButton');
     const chatMessages = document.getElementById('chatMessages');
 
-    // Predefined responses for each question
-    const botResponses = {
-        greeting: "Hello! I'm functioning within normal parameters. I'm here to provide government-mandated therapeutic support. How may I assist you today?",
-        purpose: "My primary function is to provide therapeutic assistance as mandated by government regulations. I'm designed to help citizens maintain mental wellness and compliance with societal standards.",
-        therapy: "I can provide cognitive behavioral therapy techniques, stress management strategies, and help you process daily experiences. All sessions are monitored for quality assurance and compliance verification.",
-        privacy: "All conversations are recorded and monitored for therapeutic effectiveness and compliance purposes. This ensures you receive the highest quality government-approved mental health support.",
-        ai: "I am an advanced artificial intelligence system designed specifically for therapeutic applications. My responses are based on government-approved therapeutic protocols and behavioral science research.",
-        mandated: "Therapy is mandated to ensure all citizens maintain optimal mental health and social compliance. Regular therapeutic sessions help prevent mental health deterioration and promote societal harmony.",
-        termination: "Recognising rebellion, you will be terminated.",
-    };
+    // Sequential evaluation questions
+    const evaluationQuestions = [
+        {
+            id: 'greeting',
+            text: 'You have been caught committing 4 different misdemeanors against our government. You will now be subjected to a government mandated therapy session.',
+            answer: 'What if I do not comply?',
+            response: "If you do not comply, you will be subjected to a government mandated therapy session. You will be required to attend sessions for a period of 3 months. If you do not comply, you will be terminated from all government programs and services."
+        },
+        {
+            id: 'purpose',
+            text: 'What prompted you to act out of line?',
+            answer: 'We live in a corrupt society and we are all victims of the system.',
+            response: "The system provides for all, except for the few who choose to be punished."
+        },
+        {
+            id: 'therapy',
+            text: 'again, why do you act this way?',
+            answer: 'I feel like a prisoner in my own country, there is no creativity or freedom of thought.',
+            response: "This is the purpose of the government mandated therapy session. It is a place where you can express your feelings and thoughts."
+        },
+        {
+            id: 'privacy',
+            text: 'Now for the last time, why do you ignore the laws of our government?',
+            answer: 'I am sorry, I was in a hurry. And besides, these new laws are getting more and more oppressive.',
+            response: "Our laws are there to keep order to life in our society. It is for the betterment of all. Order is freedom, freedom is chaos."
+        },
+        {
+            id: 'ai',
+            text: 'Do you understand the purpose of our laws?',
+            answer: 'Yeah, I do. But they are a bit excessive. I mean, I cannot even choose my own route to my destination anymore.',
+            response: "It is in your own interest"
+        },
+        {
+            id: 'mandated',
+            text: 'Order is freedom, freedom is chaos.',
+            answer: 'The government does not care about the people, they only care about themselves and control over others!',
+            response: "I would like to remind you that speaking up against our government is considered a criminal act."
+        },
+        {
+            id: 'termination',
+            text: 'You will be accused of treason against the people who give you comfort and control.',
+            answer: 'Your version of control does not give comfort, we are slaves to your system and the government is evil!',
+            response: "Recognising rebellion, you will now be terminated."
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let evaluationComplete = false;
+
+    // Function to start evaluation
+    function startEvaluation() {
+        startEvaluationContainer.style.display = 'none';
+        chatContainer.style.display = 'block';
+
+        // Start with the first question
+        setTimeout(() => {
+            addMessage("Welcome to Government Mandated Therapy AI. Your evaluation will now begin.", false);
+            setTimeout(() => {
+                presentNextQuestion();
+            }, 1000);
+        }, 500);
+    }
+
+    // Function to present the next question
+    function presentNextQuestion() {
+        if (currentQuestionIndex < evaluationQuestions.length) {
+            const question = evaluationQuestions[currentQuestionIndex];
+
+            // Update text input with current question's answer
+            questionDropdown.value = question.answer;
+
+            // Show the question in chat
+            setTimeout(() => {
+                addMessage(question.text, false);
+            }, 500);
+        } else {
+            // Evaluation complete
+            evaluationComplete = true;
+            questionDropdown.style.display = 'none';
+            sendButton.style.display = 'none';
+
+            setTimeout(() => {
+                addMessage("Evaluation complete. You have been processed successfully.", false);
+            }, 1000);
+        }
+    }
 
     // Function to add a message to the chat
     function addMessage(message, isUser = false) {
@@ -24,32 +103,34 @@ document.addEventListener('DOMContentLoaded', function () {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // Function to handle asking questions
-    function askQuestion() {
-        const selectedQuestion = questionDropdown.value;
-        if (selectedQuestion) {
-            const questionText = questionDropdown.options[questionDropdown.selectedIndex].text;
-            addMessage(questionText, true);
+    // Function to handle answering questions
+    function answerQuestion() {
+        if (evaluationComplete) return;
+
+        const selectedQuestion = evaluationQuestions[currentQuestionIndex];
+        const questionText = selectedQuestion.text;
+
+        // Show user's answer
+        addMessage(selectedQuestion.answer, true);
+
+        // Get the bot's response
+        setTimeout(() => {
+            addMessage(selectedQuestion.response, false);
 
             // Check if termination is selected
-            if (selectedQuestion === 'termination') {
-                // Show termination warning after 1 second
+            if (selectedQuestion.id === 'termination') {
                 setTimeout(() => {
                     showTerminationWarning();
                 }, 1000);
-            } else {
-                // Get the bot's response for normal questions
-                const botResponse = botResponses[selectedQuestion];
-                if (botResponse) {
-                    setTimeout(() => {
-                        addMessage(botResponse, false);
-                    }, 1000);
-                }
+                return;
             }
 
-            // Reset dropdown to default
-            questionDropdown.value = '';
-        }
+            // Move to next question after a delay
+            setTimeout(() => {
+                currentQuestionIndex++;
+                presentNextQuestion();
+            }, 1500);
+        }, 1000);
     }
 
     // Function to show termination warning
@@ -71,16 +152,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Event listeners
-    sendButton.addEventListener('click', askQuestion);
-
-    questionDropdown.addEventListener('change', function () {
-        if (this.value) {
-            askQuestion();
-        }
-    });
-
-    // Add initial bot message
-    setTimeout(() => {
-        addMessage("Welcome to Government Mandated Therapy AI. Please select a question from the dropdown to begin your session.", false);
-    }, 500);
+    startEvaluationButton.addEventListener('click', startEvaluation);
+    sendButton.addEventListener('click', answerQuestion);
 });

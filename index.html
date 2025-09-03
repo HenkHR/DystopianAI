@@ -17,22 +17,17 @@
     </header>
 
     <main class="main-content">
-        <div class="chat-container">
+        <div class="start-evaluation-container" id="startEvaluationContainer">
+            <button id="startEvaluationButton" class="start-evaluation-button">Start Evaluation</button>
+        </div>
+
+        <div class="chat-container" id="chatContainer" style="display: none;">
             <div class="chat-messages" id="chatMessages">
                 <!-- Chat messages will appear here -->
             </div>
             <div class="chat-input-container">
-                <select id="questionDropdown" class="question-dropdown">
-                    <option value="">Select a question...</option>
-                    <option value="greeting">Hello, how are you?</option>
-                    <option value="purpose">What is your purpose?</option>
-                    <option value="therapy">How can you help me with therapy?</option>
-                    <option value="privacy">Is our conversation private?</option>
-                    <option value="ai">Are you really an AI?</option>
-                    <option value="mandated">Why is therapy mandated?</option>
-                    <option value="termination">Our government is evil!</option>
-                </select>
-                <button id="sendButton" class="send-button">Ask</button>
+                <input type="text" id="questionDropdown" class="question-dropdown" readonly>
+                <button id="sendButton" class="send-button">Continue</button>
             </div>
         </div>
     </main>

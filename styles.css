@@ -50,6 +50,33 @@ body {
     padding: 0 2rem;
 }
 
+.start-evaluation-container {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.start-evaluation-button {
+    padding: 1.5rem 3rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.start-evaluation-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+}
+
+.start-evaluation-button:active {
+    transform: translateY(-1px);
+}
+
 .chat-container {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
@@ -103,8 +130,9 @@ body {
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s ease;
-    background: white;
-    cursor: pointer;
+    background: #f8f9fa;
+    cursor: default;
+    color: #333;
 }
 
 .question-dropdown:focus {
